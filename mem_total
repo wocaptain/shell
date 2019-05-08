@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+#Description:统计系统当前内存使用情况
+#
+time=`date '+%F %T'`
+#循环计算当前系统内存总和
+sum=0
+for mem in `ps aux|awk '{print $6}'|grep -iv 'rss'`
+do
+   sum=$[$sum+$mem]
+done
+#换算单位
+total_sum=$[$sum/1024]
+echo "$time 系统当前已用内存："$total_sum"m">./mem.log
