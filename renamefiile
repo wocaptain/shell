@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+#Description:
+#找到后缀名为txt的文件,批量修改为txt.bak
+#把.bak文件打包为123.tar.gz
+#批量删掉.bak还原文件的名字
+#
+#find找到txt文件，文件列表写到list文件中。方便后续使用
+find /123/ -type f -name '*.txt'>/tmp/txt.list
+#利用for循环进行改名
+for f in `cat /tmp/txt.list`
+do
+  mv $f $f.bak
+done
+#新建目录将bak文件考进去，方便打包操作
+mkdir /tmp/123/
+for f in `cat /tmp/txt.list`
+do
+  cp $f.bak /tmp/123
+done
+#打包
+cd /tmp
+tar zcvf 123.tar.gz 123/
+#还原
+for f in `cat /tmp/txt.list`
+do
+   mv $f.bak $f
+done
