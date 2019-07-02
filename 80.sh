@@ -12,5 +12,5 @@ fi
 n=`pgrep -l httpd|wc -l`
 if [ $n -eq 0 ]
 then
-    /usr/local/apache2/bin/apachectl start 2>/tmp/apache3_start.err
+    /usr/local/apache2/bin/apachectl start 2>/tmp/apache2_start.err
 fi
